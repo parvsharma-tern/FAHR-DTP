@@ -68,7 +68,7 @@ const AICoach: React.FC<AICoachProps> = ({ user, skills, wallet, onBack, onViewG
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
         sender: 'ai',
-        text: "That's a great question. Based on your 'Technical Skills' score of 85, you are well-positioned. I'd suggest starting with the 'Financial Controls' module to boost your audit readiness score specifically.",
+        text: "This is a demo response. In a live system, AI would give you personalised guidance here.",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages(prev => [...prev, aiResponse]);

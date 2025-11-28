@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { GoogleGenAI } from "@google/genai";
 import { UserProfile, LearningWallet } from '../types';
-import { ArrowLeft, Sparkles, RefreshCw, ChevronDown, CheckCircle2, AlertTriangle, AlertCircle, TrendingUp, Calendar, Share2, Plus, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Sparkles, RefreshCw, ChevronDown, AlertCircle, TrendingUp, Share2, Plus, ArrowRight } from 'lucide-react';
 
 interface TargetRoleGapProps {
   user: UserProfile;
@@ -39,68 +38,29 @@ const TargetRoleGap: React.FC<TargetRoleGapProps> = ({ user, wallet, onBack }) =
     ]
   );
 
-  // Gemini Integration for Fit Explanation
+  // Mock Integration for Fit Explanation
   const handleExplainFit = async () => {
     setIsExplaining(true);
-    try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const prompt = `
-        Act as a career coach for FAHR (UAE Government).
-        User: Ahmed Khan, Accountant. 
-        Target: Senior Accountant.
-        Match Score: 78%.
-        Gaps: Risk & Audit (High), Leadership (High), Digital Tools (Moderate).
-        
-        Write a 2-3 sentence professional, encouraging explanation of why he is a good fit but pointing out the specific gaps he needs to address to reach the Senior level.
-      `;
-      
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt,
-      });
-      
-      if (response.text) {
-        setAiExplanation(response.text);
-      }
-    } catch (error) {
-      console.error("Error generating explanation", error);
-    } finally {
+    // TODO: Replace this mock response with a real Gemini API call.
+    setTimeout(() => {
+      setAiExplanation("AI features are disabled in this demo build. This is a placeholder for future integration where Gemini would analyze your specific gaps in Risk & Audit and Leadership to provide a tailored explanation.");
       setIsExplaining(false);
-    }
+    }, 1500);
   };
 
-  // Gemini Integration for Action Plan
+  // Mock Integration for Action Plan
   const handleRegeneratePlan = async () => {
     setIsRegenerating(true);
-    try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const prompt = `
-        Act as a career coach for FAHR.
-        Create a 4-step bulleted action plan for Ahmed to become a Senior Accountant in 3-6 months.
-        Context: He has 120 learning credits.
-        Gaps: 
-        1. Risk & Audit (Need +25 pts)
-        2. Leadership (Need +30 pts)
-        3. Excel/BI Tools (Need +15 pts)
-        
-        Output strictly 4 distinct, actionable steps. Do not include intro text.
-      `;
-
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt,
-      });
-
-      if (response.text) {
-        // Simple parsing to split lines, removing generic bullets if present
-        const steps = response.text.split('\n').filter(line => line.trim().length > 0).map(line => line.replace(/^[\d\-\*\.]+\s*/, ''));
-        setActionPlan(steps.slice(0, 4));
-      }
-    } catch (error) {
-      console.error("Error regenerating plan", error);
-    } finally {
+    // TODO: Replace this mock response with a real Gemini API call.
+    setTimeout(() => {
+      setActionPlan([
+        "Demo Plan Step 1: Prioritize Audit Readiness certification (Placeholder)",
+        "Demo Plan Step 2: Seek mentorship from a Senior Accountant (Placeholder)",
+        "Demo Plan Step 3: Lead a small team project to build leadership (Placeholder)",
+        "Demo Plan Step 4: Review VAT compliance updates weekly (Placeholder)"
+      ]);
       setIsRegenerating(false);
-    }
+    }, 1500);
   };
 
   const domains: DomainGap[] = [
